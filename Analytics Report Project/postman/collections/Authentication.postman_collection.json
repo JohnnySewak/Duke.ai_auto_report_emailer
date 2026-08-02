@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "5fa89445-b156-46b9-90ce-ae76321cc294",
+		"name": "Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17994842"
+	},
+	"item": [
+		{
+			"name": "authenticate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"id_token\", jsonData.credentials.idToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "cust_id",
+							"value": "{{cust_id}}",
+							"type": "text"
+						},
+						{
+							"key": "api_key",
+							"value": "{{api_key}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://gv6ygwnae7.execute-api.us-east-1.amazonaws.com/api/duke_sdk/authenticate",
+					"protocol": "https",
+					"host": [
+						"gv6ygwnae7",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"duke_sdk",
+						"authenticate"
+					]
+				},
+				"description": "To authenticate with the DUKE.ai Backend, you must have a SDK client_id to begin with.\n\nGiven that you have a SDK client_id and your corresponding api_key, pass those in to the x-www-form-urlencoded body, along with the email address of the carrier that this is for: {{cust_id}}.\n\nThe email address of the carrier does not have to be an existing DUKE user, we take care of that part for you. This is how loads are compartmentalized in the DUKE.ai database to keep customer load data from intermingling.\n\nWhat is returned will be a set of AWS keys. The key pertinent to sending other requests for handling load data is the \"idToken\". If you understand Cognito, then you can use the \"access_token\" and \"refresh_token\" to refresh your token which expires after 30 minutes of inactivity. Otherwise, you can send the same request again to get a new \"idToken\"."
+			},
+			"response": [
+				{
+					"name": "Authenticate Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "cust_id",
+									"value": "{{cust_id}}",
+									"type": "text"
+								},
+								{
+									"key": "api_key",
+									"value": "{{api_key}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://gv6ygwnae7.execute-api.us-east-1.amazonaws.com/api/duke_sdk/authenticate",
+							"protocol": "https",
+							"host": [
+								"gv6ygwnae7",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"duke_sdk",
+								"authenticate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4107"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Mar 2023 04:03:44 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "ff454c28-e04f-4d51-b0b6-7f16d0bf5050"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Authorization,Content-Type,X-Amz-Date,X-Amz-Security-Token,X-Api-Key"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "Bs4ITEJhoAMFzWA="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-640ea09b-4b9d24b249acb0002da9de04;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 6dc94dcc095d58b0737002f5b7335518.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "DFW56-P5"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "KLr8loH3mWUCbIQF0Ug--hr7MwB6iXOkABN7G3SHsqLxzvRiZyWcbQ=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"msg\": \"Obtained user credentials for BLAKE@DUKE.AI; (ba8a1c25)\",\n    \"req_id\": \"ba8a1c25\",\n    \"credentials\": {\n        \"accessToken\": \"eyJraWQiOiJYV1NGdkJJSlhvdEh0VXgwejEwQ2U5VjV0ZHpUcTVpcG9WVDdvUEh6RCtFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIwZDMwOWE1NC0yNzBiLTQ5YmMtYjQ5My05NjNjYWY4MDViOTMiLCJjb2duaXRvOmdyb3VwcyI6WyJ1c2VycyJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RVm1JS1MzYUEiLCJjbGllbnRfaWQiOiIxbDhrMG5maXRsMG1tcmVyM3I4NnZyaXRjYyIsIm9yaWdpbl9qdGkiOiJkOTA3ZTVhOC00NDEzLTQzM2UtYWUzYS1kYmUwYzYwNTU0ZTQiLCJldmVudF9pZCI6ImU4OTgyMGE5LTYzZGQtNDNhYi05OTMyLTlkNGE0NTgzNzMxMyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2Nzg2ODAyMjQsImV4cCI6MTY3ODY4MzgyNCwiaWF0IjoxNjc4NjgwMjI0LCJqdGkiOiJkOTc0YjkxZS0xNDY4LTQzM2ItOTg2NC01NmM1NmUxZjZmZjciLCJ1c2VybmFtZSI6IlNES18yNjlvSlp6MWdZOGs4VDJrQlhReXBOIn0.UXmt5HN4GNUrKrW0XFSwFYyOIn-EH8r6qWvjmyndF1ka1kV7daLkMmVqyaomInI6IX04XMfUzwEetXCtsLQWNHjMfAww8No7Ec32VBqeUKz7Bv_0Vb6wOhovPhqkpzseb_H2cQjnQP6-IcIaMhONfpZ6Vxou_3NQcBGuC8DkkY2mRrbDaMduRFdc7DkBwm5TkS1TwSU51H6jW2npNTFts6lKm9gEv7fbVTe4MEyQ6RIGEpE9uUzyqgx5wz8fX9S2y5zGClzy7f4alhYkEVymj39bzlXFjKVrJUdbbgKYwHgstjn4YdrJTRDPro0el6JQ4dJou-kD3v9RAFnF1ug09w\",\n        \"idToken\": \"eyJraWQiOiJiTEw2ZTYrb21wbHo3SG5INkxGeEh4ZGFuRmNBUzU5a09XOElFOFhLb3pzPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIwZDMwOWE1NC0yNzBiLTQ5YmMtYjQ5My05NjNjYWY4MDViOTMiLCJjb2duaXRvOmdyb3VwcyI6WyJ1c2VycyJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RVm1JS1MzYUEiLCJjb2duaXRvOnVzZXJuYW1lIjoiU0RLXzI2OW9KWnoxZ1k4azhUMmtCWFF5cE4iLCJvcmlnaW5fanRpIjoiZDkwN2U1YTgtNDQxMy00MzNlLWFlM2EtZGJlMGM2MDU1NGU0IiwiYXVkIjoiMWw4azBuZml0bDBtbXJlcjNyODZ2cml0Y2MiLCJldmVudF9pZCI6ImU4OTgyMGE5LTYzZGQtNDNhYi05OTMyLTlkNGE0NTgzNzMxMyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjc4NjgwMjI0LCJleHAiOjE2Nzg2ODM4MjQsImlhdCI6MTY3ODY4MDIyNCwianRpIjoiMjVjYjA1ZDYtZjViMS00YmIyLWIyNzQtYzcxNmJmOTM1N2ViIiwiZW1haWwiOiJCTEFLRUBEVUtFLkFJIn0.DA293Fj5MW1knZrcJPvPO_5cYvNzYkuxT5MJ1VK2-JOi_98_XhyRJsSAj3l1DcL_3HdnMprFiB6JWdJ_rjY9Tk0M0QceEOTH9ABygg3PdQL-Rqj0Q6WXYYK6cbC0h84w3hYXoza2RIeSsOlKcnIJVwC62DSpqytQ2kSeELctGeFDTM-DmykI67BTft7nlRdff5XXbW7hpdgGBbqE9tZSY-fEf88-VU_XENQygrvsl1NbBtO-82Km-Xs9xP51x8qNAvF8hDVMhOpYDRi7HRAXU6HDI3ScEzixhUVu3FA_zYzgnw6fEtl94t5AnFCcREyCjXzJYH3jr-7et3gSPvtzRA\",\n        \"refreshToken\": \"eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.fAKzpW6Pnv0kNrSmQommOgT2cPh6CVyI6roAEtG2PqYpbt7299pEK57m4R7H1BE0FGkewb_i79FqXmOgsvPzTlvqg43UMu7De4XiOEoc9t193NJ_88otnu1xYZpnhyMXwAAwMXyWPtGoyykDPus2gw7WecUBEEGAvhq5tmvTvPYeyV_S51EQS2i_PDeP4bWu6xk33AquKfiU3n9dYkOsJHV-OU5COmGrSKE_AvcfaflM_qmPTKZecLHVM8Z8h5NBxcjoZQXXjVpv8XtQqgVDlZF6-pmqRVwdXcNUeSzAshj_DY30N-5oiPmspE0D6h7N3x6zOGVmhqN5d5EzgWUwGA.JKACsU_LXo1DkNFr.NL5_VtGgrZGcIfqTvKJZoVYrBM0mHuNgZju46t3dd2IsKIXxffJ9mLTwtNFEPR5kBb0DWwnOkFVao3LCdnrw09WCfSW4mA1vv-1nW6QqqjW8JCOrFAow9qSjJf-F9LPhG4c9r5pPcVOip2JfU9pfRXCaF_ysUx4s5Z4kgGECE92kRjkQKsJHXsEWlHusoGtoWhYhp1WBMQ75TYhPtjZQ5xZY1irSilWILgnR84qw8IvnO6UzpAFVDfxtncop4m-fsrFfLy2y9fyP9D6hGjKYb1SCvOvhJSlxGFGo2O20eCPIT-eIhUv8Lk1A0_sDgXJ5sqpW46byZBeWoL01NKmHrlZz2kWE7xe_ui53BEUv-tSXEanZ0oLvlg0Ew08cIEZPL3Tp3c4WNbQwHkhHmS8i4H54u5mgzCqTS4EKyczKs53rBRklkU-gyZlukhY7UabeHZOFklJeDXXqz3gA4gPNeZUswFVEQnQF_G4yBAV75Y8rO8_IcVd6dUf054Sti7n4p_5OTCqYp6qePf_UqrNbV8NHWSCdGubdR5HVUJHNMwOwns8TvFPz1si8ckh_TtspX1_hLkUVRt3amkH2l10NYmE2ceF1CVIG14R5z8K8UZx60GCdZMleV3fehzlTHvLl8HSa5TNiETTD0IPGffvQb-iO6WG8j6wSmU6HZIrR2OnR8h936CYU8C5QZ0z7OWqPQoeBagZkVNkUcOQD2CRRplmX9ZNEQE3wrTJRszafpV-X9_oor9ncKBpSyGSFWmIQE0oxQECUaF9QBFctzoUn6lfcxRwyW6s3ESk81gp3UoDXvglU13D0nTF2FgmA1ii6aiYSRBS-qsGvj6SmP-rl4tf4JvT0dm-9Fm3LaHJ9Nh9zdLdxQSFbgAmKevqPJxzn06l6iBz9xLQ7nYy8qcSNbtAzI9jq72QuVqQybtCVlzLCahsR3wQqqvwIOIIM9K5IK_o1VIktMwkePqfcAjSAITcK18W5uY3OGDlDi8Gz9JzfZrTnoFKOsb5VonRjlrm3vZKo5Swq712tIM8voUJQDs3C0YtgJw7dgdRVEvp3Z9jn4oqtxpdqYgjJPvJj3weNc1uhZKHNCjnjxb7W5-Aw2GN-U70MHIhU2tL2CRSBVsrGYewlvSbARDlQ_EwsUT16xG3BB-xQJWvZI-jVggqIhg-fSlj8aZpb63Ur5SFjyTxAec2YUDNpGttuf68JdFA0rZhfpGPcAniAGn-coj9v1QPqDLuJ9WfyMibqD3xEEEoi-W8PW5v4UmMgOt0Pi5ek6bLBii68AijNCKb1mQk3qYpBMgKoSoZIjCo-F48GAA.icPZWgGFksF9pS0FIJKCiw\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
