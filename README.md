@@ -8,10 +8,14 @@ An unpaid internship project for Duke.ai which:
 4. Sends the raw text from said pdf to ChatGPT to generate an email report in html
 5. Uses the python library yagmail through a 2FA enabled Gmail address to send the returned AI generated email report to the given company's email address as a representative of Duke.ai
 
-AI was used in the creation of this, but mostly for specifics on how to handle excel files, query ChatGPT, and use the API
+Note: The current version is in template format in consideration for the security of their API (I also formatted it this way since some of the assets I used to test this were tied to me personally)
 
-I was taught how to use the API under CEO Marcus Cooksey's instruction, he was also the one that gave me this project and internship.
 
-Lastly, the prompt generation was done entirely by my own trial and error to get the emails both looking professional and using the correct subjects when addressing itself as well as the company it is talking to.
+About its creation:
+- AI was used in the creation of this, but mostly for specifics on how to handle excel files, query ChatGPT, and use the API
 
-The logic of this project wasn't too hard for my skillset, however the technical aspects, specifically API handling, is where this project was hardest.
+- I was taught how to use the API under CEO Marcus Cooksey's instruction, he was also the one that gave me this project and internship.
+
+- The prompt was created entirely by my own trial and error to get the emails both looking professional and using the correct subjects when addressing itself as well as the company it is talking to.
+
+- The logic of this project wasn't too hard for my skillset, however the technical aspects, specifically API handling, is where this project was hardest since I lack substantial professional experience yet in those topics.
